@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bucketlist App</title>
+
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/preloader.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/preloader.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+
+    <!-- Main navigation -->
+    <nav class="deep-purple">
+    </nav>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>
