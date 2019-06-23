@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 # local import
 from instance.config import app_config
@@ -10,6 +11,8 @@ db = SQLAlchemy()
 
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
+
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -18,5 +21,38 @@ def create_app(config_name):
     @app.route("/")
     def index():
         return render_template('index.html')
+
+    @app.errorhandler(404)
+    def dummy_error_404(_error):
+        """
+        Handles 404 errors
+        """
+        message = {
+            'status': 404,
+            'message': 'The resource at {}, cannot be found.'
+        }
+
+        return render_template('index.html')
+
+    @app.errorhandler(500)
+    def dummy_error_500(_error):
+        """
+        Handles 500 errors
+        """
+        message = {
+            'status': 500,
+            'message': 'Looks like something went wrong. '
+                       'Our team of experts is working to fix this.'
+        }
+
+        return render_template('index.html')
+
+
+    # import the authentication blueprint and register it on the app
+    from .auth import auth_blueprint
+    from .bucketlists import bucketlists_blueprint
+
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(bucketlists_blueprint)
 
     return app
