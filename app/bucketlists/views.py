@@ -28,8 +28,8 @@ class BucketlistView(MethodView):
             flash("Your token is either expired or invalid")
             return redirect(url_for('auth.login'), 401)
         else:
-            name = str(request.data.get('name', ''))
-            description = str(request.data.get('description', ''))
+            name = str(request.form.get('name', ''))
+            description = str(request.form.get('description', ''))
 
             if name:
                 if not re.match("^[a-zA-Z0-9 _]*$", name):
@@ -214,10 +214,10 @@ class BucketistManipulation(MethodView):
                     "message": "That bucketlist is not yours or does not exist"}
                 return make_response(jsonify(response)), 404
 
-            name = str(request.data.get('name', '')) if str(request.data.get('name', '')) \
+            name = str(request.form.get('name', '')) if str(request.form.get('name', '')) \
                 else buckelist.name
-            description = str(request.data.get('description', '')) if \
-                str(request.data.get('description', '')) else buckelist.description
+            description = str(request.form.get('description', '')) if \
+                str(request.form.get('description', '')) else buckelist.description
 
             if name:
                 if not re.match("^[a-zA-Z0-9 _]*$", name):

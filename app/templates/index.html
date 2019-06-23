@@ -78,7 +78,7 @@
         <div class="carousel-caption">
           <div class="animated fadeInDown">
             <h2 class="h2-responsive">We help you remember all those amazing things you want to do.</h2>
-            <br/>
+            <br />
             <h3 class="h3-responsive">Whether it's hiking that far away mountain</h3>
           </div>
         </div>
@@ -137,6 +137,19 @@
   <!-- Register Modal -->
   {% include 'partials/register.html' %}
 
+  <!-- Alerts -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="alert alert-warning flash-msgs" role="alert">
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% endwith %}
+
   <!-- Scripts -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/popper.min.js') }}"></script>
@@ -145,12 +158,12 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
 
   <script type="text/javascript">
-    $('#login-lnk').click(function(){
+    $('#login-lnk').click(function () {
       $('#register-modal').modal('hide');
       $('#login-modal').modal('show');
     });
 
-    $('#register-lnk').click(function(){
+    $('#register-lnk').click(function () {
       $('#login-modal').modal('hide');
       $('#register-modal').modal('show');
     });

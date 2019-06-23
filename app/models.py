@@ -11,6 +11,7 @@ class User(db.Model):
 
     # Define the columns of the users table, starting with the primary key
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(256), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
@@ -20,8 +21,9 @@ class User(db.Model):
     bucketlists = db.relationship(
         'Bucketlist', order_by='Bucketlist.id', cascade="all, delete-orphan")
 
-    def __init__(self, email, password):
+    def __init__(self, username, email, password):
         """Initialize the user with an email and a password."""
+        self.username = username
         self.email = email
         self.password = Bcrypt().generate_password_hash(password).decode()
 
@@ -37,7 +39,7 @@ class User(db.Model):
         """
         db.session.add(self)
         db.session.commit()
-    
+
     def generate_token(self, user_id):
         """ Generates the access token"""
 

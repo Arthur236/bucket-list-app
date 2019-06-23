@@ -64,3 +64,16 @@ body,
 .get-started {
   margin: 0;
 }
+
+.flash-msgs {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.flash-msgs > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
