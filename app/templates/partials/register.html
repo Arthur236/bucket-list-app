@@ -1,0 +1,48 @@
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{ url_for('static', filename='img/avatar-2.jpg') }}" alt="avatar"
+          class="rounded-circle img-responsive">
+      </div>
+
+      <div class="modal-body text-center mb-1">
+        <h5 class="mt-1 mb-2">Register</h5>
+
+        <form>
+          <div class="md-form ml-0 mr-0">
+            <input type="text" id="username" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="username">Username</label>
+          </div>
+
+          <div class="md-form ml-0 mr-0">
+            <input type="email" id="email" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="email">Your email</label>
+          </div>
+
+          <div class="md-form ml-0 mr-0">
+            <input type="password" id="password" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="password">Your password</label>
+          </div>
+
+          <div class="md-form ml-0 mr-0">
+            <input type="password" id="cpassword" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="cpassword">Confirm password</label>
+          </div>
+
+          <div class="text-center ml-0 mr-0">
+            <button type="submit" class="btn btn-success btn-block">
+              Register <i class="fas fa-sign-in ml-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer ml-0 mr-0">
+        <p class="font-small grey-text d-flex justify-content-end">
+          Already a member? <a href="#" id="login-lnk" class="blue-text ml-1">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

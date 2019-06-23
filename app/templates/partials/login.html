@@ -1,0 +1,38 @@
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{ url_for('static', filename='img/avatar.jpg') }}" alt="avatar"
+          class="rounded-circle img-responsive">
+      </div>
+
+      <div class="modal-body text-center mb-1">
+        <h5 class="mt-1 mb-2">Login</h5>
+
+        <form>
+          <div class="md-form ml-0 mr-0">
+            <input type="email" id="email" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="email">Your email</label>
+          </div>
+
+          <div class="md-form ml-0 mr-0">
+            <input type="password" id="password" class="form-control form-control-sm validate">
+            <label data-error="wrong" data-success="right" for="password">Your password</label>
+          </div>
+
+          <div class="text-center ml-0 mr-0">
+            <button type="submit" class="btn btn-success btn-block">
+              Login <i class="fas fa-sign-in ml-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer ml-0 mr-0">
+        <p class="font-small grey-text d-flex justify-content-end">
+          Not a member? <a href="#" id="register-lnk" class="blue-text ml-1">Register</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
