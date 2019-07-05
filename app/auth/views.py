@@ -18,10 +18,10 @@ class RegistrationView(MethodView):
         """
         Handle POST request for this view. Url ---> /auth/register
         """
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        cpassword = request.form['cpassword']
+        username = str(request.form.get('username'))
+        email = str(request.form.get('email'))
+        password = str(request.form.get('password'))
+        cpassword = str(request.form.get('cpassword'))
 
         if email and password and username and cpassword:
             email_resp = my_dec.validate_email(email)
@@ -34,7 +34,7 @@ class RegistrationView(MethodView):
                 flash("The username cannot contain special characters. Only underscores")
                 return redirect(url_for('index'))
 
-            if (username.length < 3 or username.length > 50):
+            if (len(username) < 3 or len(username) > 50):
                 flash('Username should be between 3 and 50 characters')
                 return redirect(url_for('index'))
 
@@ -46,21 +46,21 @@ class RegistrationView(MethodView):
                 flash("The passwords do not match")
                 return redirect(url_for('index'))
 
-            user = User.query.filter_by(email=request.form['email']).first()
+            user = User.query.filter_by(email=email).first()
 
             if not user:
                 # There is no user so we'll try to register them
                 try:
                     user = User(username=username, email=email, password=password)
                     user.save()
-
-                    session['username'] = username
+                    
+                    session['username'] = user.username
 
                     flash("You were automatically logged in.")
-                    return redirect(url_for('bucketlists'))
+                    return redirect(url_for('bucketlists.bucketlist_view'))
                 except Exception as e:
                     # An error occured, therefore return a string message containing the error
-                    flash(str(e))
+                    flash("Looks like we couldn't log you in automatically. Please try logging in manually.")
                     return redirect(url_for('index'))
             else:
                 # There is an existing user. We don't want to register users twice
@@ -87,17 +87,15 @@ class LoginView(MethodView):
 
             # Try to authenticate the found user using their password
             if user and user.password_is_valid(password):
-                # Generate the access token. This will be used as the authorization header
-                access_token = user.generate_token(user.id)
-                if access_token:
-                    return redirect(url_for('bucketlists'))
+                session['username'] = user.username
+
+                return redirect(url_for('bucketlists.bucketlist_view'))
             else:
                 # User does not exist. Therefore, we return an error message
                 flash('The user does not exist or the password is invalid, Please try again.')
                 return redirect(url_for('index'))
 
         except Exception as e:
-            # Create a response containing an string error message
             flash(str(e))
             return redirect(url_for('index'))
 
