@@ -3,15 +3,15 @@
 
 {% block content %}
 
-<div class="container-fluid">
-  <p>Your bucketlists go here</p>
-  {% if bucketlists %}
-      
-    {% else %}
-      <blockquote>
-          <h3 class="grey-text">You currently have no bucketlists in your account.</h3>
-      </blockquote>
-    {% endif %}
-</div>
+    <div class="container-fluid">
+        <p>Your bucketlists go here</p>
+        {% if bucketlists %}
+
+        {% else %}
+            <blockquote>
+                <h3 class="grey-text">You currently have no bucketlists in your account.</h3>
+            </blockquote>
+        {% endif %}
+    </div>
 
 {% endblock %}

@@ -1,79 +1,61 @@
-/* Styles for index page */
-@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap'); 
+  html, body, .view {
+    height: 100%;
+    font-family: 'Nunito', 'Roboto', sans-serif; }
 
-html,
-body,
-.view {
-  height: 100%;
-  font-family: 'Nunito', 'Roboto', sans-serif;
-}
+    .navbar {
+      background-color: transparent;
+      box-shadow: none;
+      padding: 8vh 12vw 4vh 12vw !important;
+      font-family: 'Nunito', 'Roboto', sans-serif; }
 
-.navbar {
-  background-color: transparent;
-  box-shadow: none;
-  padding: 8vh 12vw 4vh 12vw !important;
-  font-family: 'Nunito', 'Roboto', sans-serif;
-}
+      .top-nav-collapse {
+        background-color: transparent; }
 
-.top-nav-collapse {
-  background-color: transparent;
-}
+        .home-nav .nav-item {
+          margin-right: 4vw; }
 
-.home-nav .nav-item {
-  margin-right: 4vw;
-}
+  .carousel, .carousel-item, .carousel-item.active {
+    height: 100%;
+    font-family: 'Nunito', 'Roboto', sans-serif; }
 
-.carousel,
-.carousel-item,
-.carousel-item.active {
-  height: 100%;
-  font-family: 'Nunito', 'Roboto', sans-serif;
-}
+    .carousel-inner {
+      height: 100%; }
 
-.carousel-inner {
-  height: 100%;
-}
+      .carousel .carousel-item video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: fill; }
 
-.carousel .carousel-item video {
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  object-fit: fill;
-}
-
-.carousel-caption {
+  .carousel-caption {
     width: 40vw;
     bottom: 15%;
     color: #fff;
-    text-align: left;
-}
+    text-align: left; }
 
-.carousel-indicators {
-  flex-direction: column;
-  align-items: flex-end;
-  width: fit-content;
-  bottom: 15%;
-  left: initial;
-  margin-left: 0;
-}
+    .carousel-indicators {
+      flex-direction: column;
+      align-items: flex-end;
+      width: fit-content;
+      bottom: 15%;
+      left: initial;
+      margin-left: 0; }
 
-.get-started {
-  margin: 0;
-}
+      .get-started {
+        margin: 0; }
 
-.flash-msgs {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-}
+        .flash-msgs {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          z-index: 100; }
 
-.flash-msgs > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+          .flash-msgs ul {
+            list-style: none;
+            padding: 0;
+            margin: 0; }

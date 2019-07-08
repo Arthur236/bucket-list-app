@@ -2,172 +2,172 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Bucketlist App</title>
+    <title>Bucketlist App</title>
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicon.png') }}">
-  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/bootstrap.min.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/mdb.min.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/preloader.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/mdb.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/preloader.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}"/>
 
-  <script type="text/javascript" src="{{ url_for('static', filename='js/preloader.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/preloader.js') }}"></script>
 </head>
 
 <body>
 
-  <!-- Preloader -->
-  {% include 'partials/preloader.html' %}
+<!-- Preloader -->
+{% include 'partials/preloader.html' %}
 
-  <!-- Navigation -->
-  <header>
+<!-- Navigation -->
+<header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-      <a class="navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='img/favicon.png') }}" />
-        &nbsp;
-        Bucketlist App
-      </a>
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='img/favicon.png') }}"/>
+            &nbsp;
+            Bucketlist App
+        </a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto home-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="" data-toggle="modal" data-target="#login-modal">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="" data-toggle="modal" data-target="#register-modal">Register</a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto home-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#login-modal">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#register-modal">Register</a>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </header>
+</header>
 
-  <!-- Carousel -->
-  <div id="video-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+<!-- Carousel -->
+<div id="video-carousel" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li data-target="#video-carousel" data-slide-to="0" class="active"></li>
-      <li data-target="#video-carousel" data-slide-to="1"></li>
-      <li data-target="#video-carousel" data-slide-to="2"></li>
+        <li data-target="#video-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#video-carousel" data-slide-to="1"></li>
+        <li data-target="#video-carousel" data-slide-to="2"></li>
     </ol>
 
     <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
-        <div class="view">
-          <video muted autoplay loop playsinline>
-            <source src="{{ url_for('static', filename='img/vid-1.mp4') }}" type="video/mp4" />
-          </video>
-          <div class="mask rgba-black-strong"></div>
+        <div class="carousel-item active">
+            <div class="view">
+                <video muted autoplay loop playsinline>
+                    <source src="{{ url_for('static', filename='img/vid-1.mp4') }}" type="video/mp4"/>
+                </video>
+                <div class="mask rgba-black-strong"></div>
+            </div>
+
+            <div class="carousel-caption">
+                <div class="animated fadeInDown">
+                    <h2 class="h2-responsive">We help you remember all those amazing things you want to do.</h2>
+                    <br/>
+                    <h3 class="h3-responsive">Whether it's hiking that far away mountain</h3>
+                </div>
+            </div>
         </div>
 
-        <div class="carousel-caption">
-          <div class="animated fadeInDown">
-            <h2 class="h2-responsive">We help you remember all those amazing things you want to do.</h2>
-            <br />
-            <h3 class="h3-responsive">Whether it's hiking that far away mountain</h3>
-          </div>
-        </div>
-      </div>
+        <div class="carousel-item">
+            <div class="view">
+                <video muted autoplay loop playsinline>
+                    <source src="{{ url_for('static', filename='img/vid-2.mp4') }}" type="video/mp4"/>
+                </video>
+                <div class="mask rgba-black-strong"></div>
+            </div>
 
-      <div class="carousel-item">
-        <div class="view">
-          <video muted autoplay loop playsinline>
-            <source src="{{ url_for('static', filename='img/vid-2.mp4') }}" type="video/mp4" />
-          </video>
-          <div class="mask rgba-black-strong"></div>
-        </div>
-
-        <div class="carousel-caption">
-          <div class="animated fadeInDown">
-            <h3 class="h3-responsive">Taking a drive through a desert</h3>
-            <p>Or maybe...</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <div class="view">
-          <video muted autoplay loop playsinline>
-            <source src="{{ url_for('static', filename='img/vid-3.mp4') }}" type="video/mp4" />
-          </video>
-          <div class="mask rgba-black-strong"></div>
+            <div class="carousel-caption">
+                <div class="animated fadeInDown">
+                    <h3 class="h3-responsive">Taking a drive through a desert</h3>
+                    <p>Or maybe...</p>
+                </div>
+            </div>
         </div>
 
-        <div class="carousel-caption">
-          <div class="animated fadeInDown">
-            <h3 class="h3-responsive">An epic roadtrip with friends.</h3>
-            <p>We've got you covered.</p>
-          </div>
+        <div class="carousel-item">
+            <div class="view">
+                <video muted autoplay loop playsinline>
+                    <source src="{{ url_for('static', filename='img/vid-3.mp4') }}" type="video/mp4"/>
+                </video>
+                <div class="mask rgba-black-strong"></div>
+            </div>
 
-          <div class="animated fadeInLeft">
-            <a href="#" class="btn btn-success get-started">Get Started</a>
-          </div>
+            <div class="carousel-caption">
+                <div class="animated fadeInDown">
+                    <h3 class="h3-responsive">An epic roadtrip with friends.</h3>
+                    <p>We've got you covered.</p>
+                </div>
+
+                <div class="animated fadeInLeft">
+                    <a href="#" class="btn btn-success get-started">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <a class="carousel-control-prev" href="#video-carousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#video-carousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
     </a>
-  </div>
+</div>
 
-  <!-- Login Modal -->
-  {% include 'partials/login.html' %}
+<!-- Login Modal -->
+{% include 'partials/login.html' %}
 
-  <!-- Register Modal -->
-  {% include 'partials/register.html' %}
+<!-- Register Modal -->
+{% include 'partials/register.html' %}
 
-  <!-- Alerts -->
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <div class="alert alert-warning flash-msgs" role="alert">
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
-  {% endwith %}
+<!-- Alerts -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-warning flash-msgs" role="alert">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endwith %}
 
-  <!-- Scripts -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/popper.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/bootstrap.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/mdb.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<!-- Scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/jquery-3.4.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/mdb.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
 
-  <script type="text/javascript">
+<script type="text/javascript">
     $('#login-lnk').click(function () {
-      $('#register-modal').modal('hide');
-      $('#login-modal').modal('show');
+        $('#register-modal').modal('hide');
+        $('#login-modal').modal('show');
     });
 
     $('#register-lnk').click(function () {
-      $('#login-modal').modal('hide');
-      $('#register-modal').modal('show');
+        $('#login-modal').modal('hide');
+        $('#register-modal').modal('show');
     });
-  </script>
+</script>
 
 </body>
 

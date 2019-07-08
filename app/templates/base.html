@@ -2,54 +2,88 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicon.png') }}">
-  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/bootstrap.min.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/mdb.min.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/preloader.css') }}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/mdb/css/mdb.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/preloader.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}"/>
 
-  <script type="text/javascript" src="{{ url_for('static', filename='js/preloader.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/preloader.js') }}"></script>
 </head>
 
 <body>
 
-  <!-- Preloader -->
-  <div class="preloaderBackground">
-  </div>
+<!-- Preloader -->
+<div class="preloaderBackground"></div>
 
-  <!-- Sidebar -->
-  <div id="slide-out" class="side-nav">
-  </div>
+<!-- Top Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='img/favicon.png') }}"/>
+        Bucketlist App
+    </a>
 
-  <!-- Main navigation -->
-  <nav class="deep-purple">
-  </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- Page content -->
-  {% block content %}
-  {% endblock %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" data-toggle="modal" data-target="#login-modal">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" data-toggle="modal" data-target="#register-modal">Register</a>
+            </li>
+            <li class="nav-item avatar">
+                <a class="nav-link p-0" href="#">
+                    <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="rounded-circle z-depth-0"
+                         alt="avatar" height="35">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-  <!-- Scripts -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/popper.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/bootstrap.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/mdb.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
 
-  {% block scripts %}
-  {% endblock %}
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/jquery-3.4.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/mdn/js/mdb.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+{% block scripts %}
+{% endblock %}
 
 </body>
+
 </html>
