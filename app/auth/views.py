@@ -34,7 +34,7 @@ class RegistrationView(MethodView):
                 flash("The username cannot contain special characters. Only underscores")
                 return redirect(url_for('index'))
 
-            if (len(username) < 3 or len(username) > 50):
+            if len(username) < 3 or len(username) > 50:
                 flash('Username should be between 3 and 50 characters')
                 return redirect(url_for('index'))
 

@@ -1,11 +1,11 @@
 import re
 
 from flask.views import MethodView
-from flask import current_app, jsonify, make_response, flash, redirect, render_template, request, session, url_for
+from flask import flash, redirect, render_template, request, url_for
 from sqlalchemy import func
 
 from . import bucketlists_blueprint
-from app.models import Bucketlist
+from app.models import Bucketlist, User
 from ..decorators import MyDecorator
 
 my_dec = MyDecorator()
@@ -22,7 +22,7 @@ class BucketlistView(MethodView):
         """
         is_authenticated = my_dec.is_authenticated()
 
-        if (is_authenticated['status'] == False):
+        if not is_authenticated['status']:
             flash('You need to be logged in to do that')
             return redirect(url_for('index'))
 
@@ -60,7 +60,7 @@ class BucketlistView(MethodView):
         """
         is_authenticated = my_dec.is_authenticated()
 
-        if (is_authenticated['status'] == False):
+        if not is_authenticated['status']:
             flash('You need to be logged in to do that')
             return redirect(url_for('index'))
 
@@ -68,6 +68,7 @@ class BucketlistView(MethodView):
         page = int(request.args.get('page', 1))
         limit = 10
 
+        user = User.query.filter_by(id=user_id).first()
         total_lists = Bucketlist.query.filter_by(user_id=user_id).count()
         paginated_lists = Bucketlist.query.filter_by(user_id=user_id). \
             order_by(Bucketlist.name.asc()).paginate(page, limit)
@@ -84,7 +85,7 @@ class BucketlistView(MethodView):
                 }
                 results.append(obj)
 
-        return render_template('bucketlists.html', bucketlists=results, total_lists=total_lists)
+        return render_template('bucketlists.html', username=user.username, bucketlists=results, total_lists=total_lists)
 
 
 bucketlist_view = BucketlistView.as_view('bucketlist_view')  # pylint: disable=invalid-name

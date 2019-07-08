@@ -40,6 +40,7 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
 
+
 class Bucketlist(db.Model):
     """This class represents the bucketlist table."""
 
@@ -54,9 +55,11 @@ class Bucketlist(db.Model):
         db.DateTime, default=db.func.current_timestamp(),
         onupdate=db.func.current_timestamp())
 
-    def __init__(self, name):
+    def __init__(self, user_id, name, description):
         """initialize with name."""
+        self.user_id = user_id
         self.name = name
+        self.description = description
 
     def save(self):
         db.session.add(self)
