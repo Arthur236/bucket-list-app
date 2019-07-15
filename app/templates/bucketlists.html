@@ -7,13 +7,29 @@
         <h3 class="page-title">Your Bucketlists</h3>
         <div class="line"></div>
 
-        {% if bucketlists %}
+        <button class="fab-add-button" data-toggle="modal" data-target="#addBucketlistModal">
+            <i class="fas fa-plus"></i>
+        </button>
 
+        {% if bucketlists and recent_lists %}
+            <h4>Recent Bucketlists</h4>
+
+            <div class="bucketlist-card-wrapper">
+                {% for b_list in recent_lists %}
+                    <div class="bucketlist-card">
+                        <p class="bucketlist-card__title">{{ b_list['name'] }}</p>
+                        <p class="bucketlist-card__description">{{ b_list['description'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <blockquote>
                 <h3 class="grey-text">You currently have no bucketlists in your account.</h3>
             </blockquote>
         {% endif %}
     </div>
+
+    <!-- Add Bucketlist Modal -->
+    {% include 'partials/add-bucketlist.html' %}
 
 {% endblock %}

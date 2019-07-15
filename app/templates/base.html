@@ -45,12 +45,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="" data-toggle="modal" data-target="#login-modal">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="" data-toggle="modal" data-target="#register-modal">Register</a>
-            </li>
             <li class="nav-item avatar">
                 <a class="nav-link p-0" href="#">
                     <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="rounded-circle z-depth-1 hoverable"
@@ -67,14 +61,16 @@
         <div class="avatar-wrapper">
             <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="rounded-circle z-depth-1 hoverable"
                          alt="avatar" height="100" width="100">
-            <div>{{ username }}</div>
+            <div>{{ session['username'] }}</div>
         </div>
 
         <div class="sidebar-links-wrapper">
             <ul class="sidebar-links">
-                <li><a href="/bucketlists"><i class="fas fa-desktop"></i> Dashboard</a></li>
-                <li><a href="/profile"><i class="far fa-user-circle"></i> Profile</a></li>
-                <li><a href="/logout"><i class="fas fa-power-off"></i> Logout</a></li>
+                {% if session['username'] %}
+                    <li><a href="/bucketlists"><i class="fas fa-desktop"></i> Dashboard</a></li>
+                    <li><a href="/profile"><i class="far fa-user-circle"></i> Profile</a></li>
+                    <li><a href="/logout"><i class="fas fa-power-off"></i> Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -85,6 +81,19 @@
         {% endblock %}
     </div>
 </div>
+
+<!-- Alerts -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-warning flash-msgs" role="alert">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endwith %}
 
 <!-- Scripts -->
 <script type="text/javascript" src="{{ url_for('static', filename='vendor/mdb/js/jquery-3.4.1.min.js') }}"></script>

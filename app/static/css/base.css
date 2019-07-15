@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap'); 
   html, body {
-    min-height: 100vh; }
+    min-height: 100vh;
+    background-color: #f9f9fb; }
 
     html, body, p, a {
       font-family: 'Nunito', 'Roboto', sans-serif; }
@@ -43,6 +44,7 @@
         padding-top: 75px;
         color: #fefefe;
         -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
         .wrapper #sidebar .avatar-wrapper {
           display: flex;
@@ -71,5 +73,39 @@
         display: flex;
         width: 100%;
         padding-top: 75px; }
+        .wrapper #content .fab-add-button {
+          position: absolute;
+          bottom: 2rem;
+          right: 1rem;
+          width: 3.5em;
+          height: 3.5em;
+          background-color: #218e64;
+          color: #fefefe;
+          border-radius: 50%;
+          -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+          -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+          z-index: 999; }
+          .wrapper #content .fab-add-button:hover {
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
         .wrapper #content .page-title {
           color: #218e64; }
+          .wrapper #content .bucketlist-card-wrapper {
+            display: flex; }
+            .wrapper #content .bucketlist-card-wrapper .bucketlist-card {
+              height: 100px;
+              width: 200px;
+              padding: 10px 0;
+              margin: 10px;
+              border-radius: 5px;
+              background-color: #fff;
+              -webkit-box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3);
+              -moz-box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3);
+              box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3); }
+              .wrapper #content .bucketlist-card-wrapper .bucketlist-card__title {
+                padding: 0 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+                .wrapper #content .bucketlist-card-wrapper .bucketlist-card__description {
+                  padding: 0 10px; }

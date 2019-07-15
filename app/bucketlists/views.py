@@ -68,8 +68,9 @@ class BucketlistView(MethodView):
         page = int(request.args.get('page', 1))
         limit = 10
 
-        user = User.query.filter_by(id=user_id).first()
         total_lists = Bucketlist.query.filter_by(user_id=user_id).count()
+        recent_lists = Bucketlist.query.filter_by(user_id=user_id). \
+            order_by(Bucketlist.date_modified.desc()).limit(6)
         paginated_lists = Bucketlist.query.filter_by(user_id=user_id). \
             order_by(Bucketlist.name.asc()).paginate(page, limit)
         results = []
@@ -85,7 +86,8 @@ class BucketlistView(MethodView):
                 }
                 results.append(obj)
 
-        return render_template('bucketlists.html', username=user.username, bucketlists=results, total_lists=total_lists)
+        return render_template('bucketlists.html', bucketlists=results, recent_lists=recent_lists,
+                               total_lists=total_lists)
 
 
 bucketlist_view = BucketlistView.as_view('bucketlist_view')  # pylint: disable=invalid-name
