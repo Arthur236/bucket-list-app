@@ -8,6 +8,7 @@ html, body {
 
 html, body, p, a {
   font-family: $default-font;
+  color: $text-color-dark;
 }
 
 a, a:hover, a:focus {
@@ -104,9 +105,9 @@ i, span {
     padding-top: $top-nav-margin;
 
     .fab-add-button {
-      position: absolute;
-      bottom: 2rem;
-      right: 1rem;
+      position: fixed;
+      bottom: 5%;
+      right: 5%;
       width: 3.5em;
       height: 3.5em;
       background-color: $accent-color;
@@ -130,25 +131,50 @@ i, span {
 
     .bucketlist-card-wrapper {
       display: flex;
+      flex-wrap: wrap;
 
       .bucketlist-card {
-        height: 100px;
-        width: 200px;
+        position: relative;
+        width: 275px;
+        max-width: 275px;
+        height: 150px;
         padding: 10px 0;
         margin: 10px;
         border-radius: 5px;
         background-color: #fff;
-        -webkit-box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3);
-        box-shadow: 9px 10px 15px -10px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+        &:hover {
+          cursor: pointer;
+          -webkit-box-shadow: 0 0 10px 0 $accent-color-alpha;
+          -moz-box-shadow: 0 0 10px 0 $accent-color-alpha;
+          box-shadow: 0 0 10px 0 $accent-color-alpha;
+        }
 
         &__title {
           padding: 0 10px;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          margin: 0;
+          color: $accent-color;
         }
 
         &__description {
           padding: 0 10px;
+          margin: 0;
+        }
+
+        &__footer {
+          font-size: 70%;
+          position: absolute;
+          width: 100%;
+          text-align: right;
+          color: $secondary-text-color;
+          bottom: 5px;
+          padding: 5px 10px 0 10px;
+          margin: 0;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
       }
     }

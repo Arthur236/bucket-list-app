@@ -74,6 +74,22 @@ class BucketlistView(MethodView):
         paginated_lists = Bucketlist.query.filter_by(user_id=user_id). \
             order_by(Bucketlist.name.asc()).paginate(page, limit)
         results = []
+        recent_results = []
+
+        if recent_lists:
+            for bucketlist in recent_lists:
+                # Truncate long descriptions
+                char_limit = 90
+                new_desc = bucketlist.description[:char_limit] + '...' * (len(bucketlist.description) > char_limit)
+
+                obj = {
+                    'id': bucketlist.id,
+                    'name': bucketlist.name,
+                    'description': new_desc,
+                    'date_created': bucketlist.date_created,
+                    'date_modified': bucketlist.date_modified
+                }
+                recent_results.append(obj)
 
         if paginated_lists:
             for bucketlist in paginated_lists.items:
@@ -86,7 +102,7 @@ class BucketlistView(MethodView):
                 }
                 results.append(obj)
 
-        return render_template('bucketlists.html', bucketlists=results, recent_lists=recent_lists,
+        return render_template('bucketlists.html', bucketlists=results, recent_lists=recent_results,
                                total_lists=total_lists)
 
 
