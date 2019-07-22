@@ -1,6 +1,6 @@
 /* eslint-disable */
 $(document).ready(function () {
-  $('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
+  $('.hamburger').on('click', function () {
+    $('#sidebar').toggleClass('open');
   });
 });

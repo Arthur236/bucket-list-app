@@ -47,7 +47,8 @@
             </li>
             <li class="nav-item avatar">
                 <a class="nav-link p-0" href="#">
-                    <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="rounded-circle z-depth-1 hoverable"
+                    <img src="{{ url_for('static', filename='img/avatar.jpg') }}"
+                         class="rounded-circle z-depth-1 hoverable"
                          alt="avatar" height="35" width="35">
                 </a>
             </li>
@@ -58,9 +59,15 @@
 <div class="wrapper">
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
+        <div class="hamburger">
+            <div class="hm-one"></div>
+            <div class="hm-two"></div>
+            <div class="hm-three"></div>
+        </div>
+
         <div class="avatar-wrapper">
             <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="rounded-circle z-depth-1 hoverable"
-                         alt="avatar" height="100" width="100">
+                 alt="avatar" height="100" width="100">
             <div>{{ session['username'] }}</div>
         </div>
 

@@ -15,6 +15,7 @@ class BucketlistView(MethodView):
     """
       Handles bucketlist creation and retrieval
     """
+
     @staticmethod
     def post():
         """
@@ -37,7 +38,7 @@ class BucketlistView(MethodView):
 
             b_list = Bucketlist.query. \
                 filter(func.lower(Bucketlist.name) == name.lower(),
-                        Bucketlist.user_id == user_id).first()
+                       Bucketlist.user_id == user_id).first()
 
             if not b_list:
                 # There is no list so we'll try to create it
@@ -79,12 +80,15 @@ class BucketlistView(MethodView):
         if recent_lists:
             for bucketlist in recent_lists:
                 # Truncate long descriptions
-                char_limit = 90
-                new_desc = bucketlist.description[:char_limit] + '...' * (len(bucketlist.description) > char_limit)
+                name_limit = 25
+                description_limit = 90
+                new_name = bucketlist.name[:name_limit] + '...' * (len(bucketlist.name) > name_limit)
+                new_desc = bucketlist.description[:description_limit] + '...' * (
+                            len(bucketlist.description) > description_limit)
 
                 obj = {
                     'id': bucketlist.id,
-                    'name': bucketlist.name,
+                    'name': new_name,
                     'description': new_desc,
                     'date_created': bucketlist.date_created,
                     'date_modified': bucketlist.date_modified
@@ -112,6 +116,6 @@ bucketlist_view = BucketlistView.as_view('bucketlist_view')  # pylint: disable=i
 
 # Define rules
 bucketlists_blueprint.add_url_rule('/bucketlists',
-                                     view_func=bucketlist_view, methods=['POST', 'GET'])
+                                   view_func=bucketlist_view, methods=['POST', 'GET'])
 # bucketlists_blueprint.add_url_rule('/bucketlists/<list_id>',
 #                                      view_func=bucketist_manipulation, methods=['GET', 'PUT', 'DELETE'])

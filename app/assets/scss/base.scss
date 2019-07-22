@@ -53,6 +53,7 @@ i, span {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    position: relative;
     width: 270px;
     background-color: $secondary-color;
     padding-top: $top-nav-margin;
@@ -60,6 +61,42 @@ i, span {
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    transition: .3s;
+
+    .hamburger {
+      position: absolute;
+      top: $top-nav-margin;
+      right: 10px;
+      width: 30px;
+
+      div {
+        height: 3px;
+        background: $text-color;
+        margin: 5px 0;
+        border-radius: 24px;
+        transition: .4s;
+      }
+
+      .hm-one {
+        width: 30px;
+      }
+
+      .hm-two {
+        width: 20px;
+      }
+
+      .hm-three {
+        width: 25px;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        div {
+          width: 30px;
+        }
+      }
+    }
 
     .avatar-wrapper {
       display: flex;
@@ -67,6 +104,7 @@ i, span {
       text-align: center;
       align-items: center;
       margin-top: 10vh;
+      transition: opacity .4s;
 
       img {
         margin-bottom: 5px;
@@ -75,6 +113,7 @@ i, span {
 
     .sidebar-links-wrapper {
       margin-top: 4vh;
+      transition: opacity .4s;
 
       .sidebar-links {
         list-style: none;
@@ -95,6 +134,18 @@ i, span {
             color: $accent-color;
           }
         }
+      }
+    }
+
+    &.open {
+      width: 50px;
+
+      .avatar-wrapper {
+        opacity: 0;
+      }
+
+      .sidebar-links-wrapper {
+        opacity: 0;
       }
     }
   }
@@ -140,7 +191,7 @@ i, span {
         height: 150px;
         padding: 10px 0;
         margin: 10px;
-        border-radius: 5px;
+        border-radius: 5px 50px 5px 50px;
         background-color: #fff;
         overflow: hidden;
         -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -175,6 +226,28 @@ i, span {
           padding: 5px 10px 0 10px;
           margin: 0;
           border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .bucketlist-table__dashboard {
+      .table {
+        tr {
+          &.hover {
+            transition: .5s;
+
+            &:hover {
+              cursor: pointer;
+              transform: scaleY(1.001);
+              -webkit-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
+              -moz-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
+              box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
+            }
+          }
+        }
+
+        th {
+          font-weight: 800;
         }
       }
     }

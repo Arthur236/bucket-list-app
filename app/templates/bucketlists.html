@@ -34,12 +34,11 @@
             <h5 class="page-title">All Your Bucketlists</h5>
             <div class="line"></div>
 
-            <div>
-                <table class="table table-hover">
+            <div class="bucketlist-table__dashboard">
+                <table class="table table-borderless">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -47,10 +46,9 @@
                     <tbody>
 
                     {% for b_list in bucketlists %}
-                        <tr>
+                        <tr class="hover">
                             <td>{{ b_list['name'] }}</td>
-                            <td><i class="fas fa-edit"></i></td>
-                            <td><i class="fas fa-trash"></i></td>
+                            <td><i class="fas fa-trash red-text" title="Delete {{ b_list['name'] }}"></i></td>
                         </tr>
                     {% endfor %}
                     </tbody>

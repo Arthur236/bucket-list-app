@@ -40,23 +40,48 @@
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
+        position: relative;
         width: 270px;
         background-color: #262835;
         padding-top: 75px;
         color: #cbcdd7;
         -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
         -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        transition: 0.3s; }
+        .wrapper #sidebar .hamburger {
+          position: absolute;
+          top: 75px;
+          right: 10px;
+          width: 30px; }
+          .wrapper #sidebar .hamburger div {
+            height: 3px;
+            background: #cbcdd7;
+            margin: 5px 0;
+            border-radius: 24px;
+            transition: 0.4s; }
+            .wrapper #sidebar .hamburger .hm-one {
+              width: 30px; }
+              .wrapper #sidebar .hamburger .hm-two {
+                width: 20px; }
+                .wrapper #sidebar .hamburger .hm-three {
+                  width: 25px; }
+                  .wrapper #sidebar .hamburger:hover {
+                    cursor: pointer; }
+                    .wrapper #sidebar .hamburger:hover div {
+                      width: 30px; }
         .wrapper #sidebar .avatar-wrapper {
           display: flex;
           flex-direction: column;
           text-align: center;
           align-items: center;
-          margin-top: 10vh; }
+          margin-top: 10vh;
+          transition: opacity 0.4s; }
           .wrapper #sidebar .avatar-wrapper img {
             margin-bottom: 5px; }
         .wrapper #sidebar .sidebar-links-wrapper {
-          margin-top: 4vh; }
+          margin-top: 4vh;
+          transition: opacity 0.4s; }
           .wrapper #sidebar .sidebar-links-wrapper .sidebar-links {
             list-style: none;
             padding: 0;
@@ -70,6 +95,12 @@
                 .wrapper #sidebar .sidebar-links-wrapper .sidebar-links a:hover {
                   background-color: #191b27;
                   color: #218e64; }
+        .wrapper #sidebar.open {
+          width: 50px; }
+          .wrapper #sidebar.open .avatar-wrapper {
+            opacity: 0; }
+            .wrapper #sidebar.open .sidebar-links-wrapper {
+              opacity: 0; }
       .wrapper #content {
         display: flex;
         width: 100%;
@@ -103,7 +134,7 @@
               height: 150px;
               padding: 10px 0;
               margin: 10px;
-              border-radius: 5px;
+              border-radius: 5px 50px 5px 50px;
               background-color: #fff;
               overflow: hidden;
               -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -131,3 +162,13 @@
                       padding: 5px 10px 0 10px;
                       margin: 0;
                       border-top: 1px solid rgba(0, 0, 0, 0.1); }
+        .wrapper #content .bucketlist-table__dashboard .table tr.hover {
+          transition: 0.5s; }
+          .wrapper #content .bucketlist-table__dashboard .table tr.hover:hover {
+            cursor: pointer;
+            transform: scaleY(1.001);
+            -webkit-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5); }
+        .wrapper #content .bucketlist-table__dashboard .table th {
+          font-weight: 800; }
