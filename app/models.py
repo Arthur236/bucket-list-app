@@ -1,7 +1,7 @@
 from app import db
 from flask_bcrypt import Bcrypt
-import jwt
-from datetime import datetime, timedelta
+from slugify import slugify
+from sqlalchemy import event
 
 
 class User(db.Model):
@@ -15,6 +15,7 @@ class User(db.Model):
     email = db.Column(db.String(256), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
+    slug = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
@@ -26,6 +27,11 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = Bcrypt().generate_password_hash(password).decode()
+
+    @staticmethod
+    def slugify(target, value, oldvalue, initiator):
+        if value and (not target.slug or value != oldvalue):
+            target.slug = slugify(value)
 
     def password_is_valid(self, password):
         """
@@ -50,6 +56,7 @@ class Bucketlist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     name = db.Column(db.String(255))
     description = db.Column(db.Text)
+    slug = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(
         db.DateTime, default=db.func.current_timestamp(),
@@ -60,6 +67,11 @@ class Bucketlist(db.Model):
         self.user_id = user_id
         self.name = name
         self.description = description
+
+    @staticmethod
+    def slugify(target, value, oldvalue, initiator):
+        if value and (not target.slug or value != oldvalue):
+            target.slug = slugify(value)
 
     def save(self):
         db.session.add(self)
@@ -75,3 +87,8 @@ class Bucketlist(db.Model):
 
     def __repr__(self):
         return "<Bucketlist: {}>".format(self.name)
+
+
+# Set slug value during create and update events
+event.listen(User.username, 'set', User.slugify, retval=False)
+event.listen(Bucketlist.name, 'set', Bucketlist.slugify, retval=False)
