@@ -86,7 +86,7 @@ class BucketList(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<BucketList: {}>".format(self.name)
+        return "<Bucket list: {}>".format(self.name)
 
 
 # Set slug value during create and update events

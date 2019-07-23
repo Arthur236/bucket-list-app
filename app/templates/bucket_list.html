@@ -2,5 +2,33 @@
 {% block title %}{{ bucket_list['name'] }}{% endblock %}
 
 {% block content %}
-    <h3>{{ bucket_list['name'] }}</h3>
+
+    <div class="container-fluid">
+        <h5 class="page-title">{{ bucket_list['name'] }} Details</h5>
+        <div class="line"></div>
+
+        <form id="bucket-list-edit-form" action="/bucket-lists/{{ bucket_list['slug'] }}" method="post" class="col-10">
+            <div class="md-form mb-5">
+                <input type="text" id="name" name="name" class="form-control validate"
+                       value="{{ bucket_list['name'] }}">
+                <label for="name">Name</label>
+            </div>
+
+            <div class="md-form mb-5">
+                <textarea id="description" name="description" class="md-textarea form-control" rows="5">{{ bucket_list['description'] }}</textarea>
+                <label for="description">Description</label>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block mb-3">Edit</button>
+        </form>
+
+        <div class="col-10 delete-button">
+            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteModal{{ bucket_list['slug'] }}">Delete</button>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    {% with name=bucket_list['name'], slug=bucket_list['slug'] %}
+        {% include 'partials/delete-bucket-list.html' %}
+    {% endwith %}
 {% endblock %}

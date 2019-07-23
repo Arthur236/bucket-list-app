@@ -21,6 +21,13 @@ i, span {
   display: inline-block;
 }
 
+.flash-msgs {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
 .navbar {
   padding: 10px 50px;
   background-color: $primary-color;
@@ -251,5 +258,9 @@ i, span {
         }
       }
     }
+  }
+
+  .delete-button {
+
   }
 }

@@ -25,23 +25,23 @@ class RegistrationView(MethodView):
             email_resp = my_dec.validate_email(email)
 
             if not email_resp:
-                flash("The email provided is not valid.")
+                flash("The email provided is not valid.", 'error')
                 return redirect(url_for('index'))
 
             if not re.match("^[a-zA-Z0-9 _]*$", username):
-                flash("The username cannot contain special characters. Only underscores")
+                flash("The username cannot contain special characters. Only underscores", 'error')
                 return redirect(url_for('index'))
 
             if len(username) < 3 or len(username) > 50:
-                flash('Username should be between 3 and 50 characters')
+                flash('Username should be between 3 and 50 characters', 'error')
                 return redirect(url_for('index'))
 
             if len(password) < 6:
-                flash("The password should be at least 6 characters long")
+                flash("The password should be at least 6 characters long", 'error')
                 return redirect(url_for('index'))
 
             if password != cpassword:
-                flash("The passwords do not match")
+                flash("The passwords do not match", 'error')
                 return redirect(url_for('index'))
 
             user = User.query.filter_by(email=email).first()
@@ -54,16 +54,16 @@ class RegistrationView(MethodView):
                     
                     session['username'] = user.username
 
-                    flash("You were automatically logged in.")
+                    flash("You were automatically logged in.", 'success')
                     return redirect(url_for('bucket_lists.bucket_list_view'))
                 except Exception as e:
                     # An error occurred, therefore return a string message containing the error
-                    flash("Looks like we couldn't log you in automatically. Please try logging in manually.")
+                    flash("Looks like we couldn't log you in automatically. Please try logging in manually.", 'error')
                     return redirect(url_for('index'))
             else:
                 # There is an existing user. We don't want to register users twice
                 # Return a message to the user telling them that they they already exist
-                flash('User already exists. Please login.')
+                flash('User already exists. Please login.', 'error')
                 return redirect(url_for('index'))
 
 
@@ -88,7 +88,7 @@ class LoginView(MethodView):
                 return redirect(url_for('bucket_lists.bucket_list_view'))
             else:
                 # User does not exist. Therefore, we return an error message
-                flash('The user does not exist or the password is invalid, Please try again.')
+                flash('The user does not exist or the password is invalid, Please try again.', 'error')
                 return redirect(url_for('index'))
 
         except Exception as e:

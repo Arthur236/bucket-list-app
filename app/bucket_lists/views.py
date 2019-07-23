@@ -21,7 +21,7 @@ class BucketListView(MethodView):
         is_authenticated = my_dec.is_authenticated()
 
         if not is_authenticated['status']:
-            flash('You need to be logged in to do that')
+            flash('You need to be logged in to do that', 'error')
             return redirect(url_for('index'))
 
         user_id = is_authenticated['user_id']
@@ -30,7 +30,7 @@ class BucketListView(MethodView):
 
         if name:
             if not re.match("^[a-zA-Z0-9 _]*$", name):
-                flash("The list name cannot contain special characters. Only underscores (_)")
+                flash("The list name cannot contain special characters. Only underscores (_)", 'error')
                 return redirect(url_for('bucket_lists.bucket_list_view'))
 
             b_list = BucketList.query. \
@@ -42,13 +42,13 @@ class BucketListView(MethodView):
                 bucket_list = BucketList(user_id=user_id, name=name, description=description)
                 bucket_list.save()
 
-                flash("Bucket list created successfully")
+                flash("Bucket list created successfully", 'success')
                 return redirect(url_for('bucket_lists.bucket_list_view'))
 
-            flash("That bucket_list already exists")
+            flash("That bucket_list already exists", 'error')
             return redirect(url_for('bucket_lists.bucket_list_view'))
 
-        flash("Bucket list name not provided")
+        flash("Bucket list name not provided", 'error')
         return redirect(url_for('bucket_lists.bucket_list_view'))
 
     @staticmethod
@@ -58,7 +58,7 @@ class BucketListView(MethodView):
         is_authenticated = my_dec.is_authenticated()
 
         if not is_authenticated['status']:
-            flash('You need to be logged in to do that')
+            flash('You need to be logged in to do that', 'error')
             return redirect(url_for('index'))
 
         user_id = is_authenticated['user_id']
@@ -80,12 +80,12 @@ class BucketListView(MethodView):
                 description_limit = 90
                 new_name = bucket_list.name[:name_limit] + '...' * (len(bucket_list.name) > name_limit)
                 new_desc = bucket_list.description[:description_limit] + '...' * (
-                            len(bucket_list.description) > description_limit)
+                        len(bucket_list.description) > description_limit)
 
                 obj = {
-                    'id': bucket_list.id,
                     'name': new_name,
                     'description': new_desc,
+                    'slug': bucket_list.slug,
                     'date_created': bucket_list.date_created,
                     'date_modified': bucket_list.date_modified
                 }
@@ -94,9 +94,9 @@ class BucketListView(MethodView):
         if paginated_lists:
             for bucket_list in paginated_lists.items:
                 obj = {
-                    'id': bucket_list.id,
                     'name': bucket_list.name,
                     'description': bucket_list.description,
+                    'slug': bucket_list.slug,
                     'date_created': bucket_list.date_created,
                     'date_modified': bucket_list.date_modified
                 }
@@ -106,8 +106,8 @@ class BucketListView(MethodView):
                                total_lists=total_lists)
 
 
-class BucketListRUD(MethodView):
-    """Handles bucket_list read, update and delete"""
+class BucketListReadUpdate(MethodView):
+    """Handles bucket list read and update"""
 
     @staticmethod
     def get(slug):
@@ -116,14 +116,14 @@ class BucketListRUD(MethodView):
         is_authenticated = my_dec.is_authenticated()
 
         if not is_authenticated['status']:
-            flash('You need to be logged in to do that')
+            flash('You need to be logged in to do that', 'error')
             return redirect(url_for('index'))
 
         user_id = is_authenticated['user_id']
         bucket_list = BucketList.query.filter_by(user_id=user_id, slug=slug).first()
 
         if not bucket_list:
-            flash("That bucket list does not exist")
+            flash("That bucket list does not exist", 'error')
             return redirect(url_for('bucket_lists.bucket_list_view'))
 
         if bucket_list.user_id == user_id:
@@ -137,13 +137,88 @@ class BucketListRUD(MethodView):
 
             return render_template('bucket_list.html', bucket_list=response)
 
+    @staticmethod
+    def post(slug):
+        """Handles bucket list edit"""
+        is_authenticated = my_dec.is_authenticated()
+
+        if not is_authenticated['status']:
+            flash('You need to be logged in to do that', 'error')
+            return redirect(url_for('index'))
+
+        user_id = is_authenticated['user_id']
+        bucket_list = BucketList.query.filter_by(user_id=user_id, slug=slug).first()
+
+        if not bucket_list:
+            flash("That bucket list does not exist", 'error')
+            return redirect(url_for('bucket_lists.bucket_list_view'))
+
+        name = str(request.form.get('name', '')) if str(request.form.get('name', '')) \
+            else bucket_list.name
+        description = str(request.form.get('description', '')) if \
+            str(request.form.get('description', '')) else bucket_list.description
+
+        if name:
+            if not re.match("^[a-zA-Z0-9 _]*$", name):
+                flash("The list name cannot contain special characters. Only underscores (_)", 'error')
+                return redirect(url_for('bucket_lists.bucket_list_rnu', slug=bucket_list.slug))
+
+            b_list = BucketList.query. \
+                filter(func.lower(BucketList.name) == name.lower(),
+                       BucketList.user_id == user_id).first()
+
+            if b_list and b_list.id != bucket_list.id:
+                flash("A list with that name already exists", 'error')
+                return redirect(url_for('bucket_lists.bucket_list_rnu', slug=bucket_list.slug))
+
+            if bucket_list.user_id == user_id:
+                bucket_list.name = name
+                bucket_list.description = description
+                bucket_list.save()
+
+                flash("Bucket list updated successfully", 'success')
+                return redirect(url_for('bucket_lists.bucket_list_rnu', slug=bucket_list.slug))
+
+            flash("An error occurred while updating the bucket list", 'error')
+            return redirect(url_for('bucket_lists.bucket_list_rnu', slug=bucket_list.slug))
+
+
+class BucketListDelete(MethodView):
+    """Handles bucket list delete"""
+    @staticmethod
+    def post(slug):
+        """Handles bucket list delete"""
+        is_authenticated = my_dec.is_authenticated()
+
+        if not is_authenticated['status']:
+            flash('You need to be logged in to do that', 'error')
+            return redirect(url_for('index'))
+
+        user_id = is_authenticated['user_id']
+        bucket_list = BucketList.query.filter_by(user_id=user_id, slug=slug).first()
+
+        if not bucket_list:
+            flash("That bucket list does not exist", 'error')
+            return redirect(url_for('bucket_lists.bucket_list_view'))
+
+        if bucket_list.user_id == user_id:
+            bucket_list.delete()
+
+            flash("Bucket list deleted successfully", 'success')
+            return redirect(url_for('bucket_lists.bucket_list_view'))
+
+        flash("You do not have permission to delete that bucket list", 'error')
+        return redirect(url_for('bucket_lists.bucket_list_view'))
+
 
 bucket_list_view = BucketListView.as_view('bucket_list_view')  # pylint: disable=invalid-name
-# bucketist_manipulation = BucketistManipulation.as_view('bucketist_manipulation')  # pylint: disable=invalid-name
-
+bucket_list_rnu = BucketListReadUpdate.as_view('bucket_list_rnu')  # pylint: disable=invalid-name
+bucket_list_delete = BucketListDelete.as_view('bucket_list_delete')  # pylint: disable=invalid-name
 
 # Define rules
 bucket_lists_blueprint.add_url_rule('/bucket-lists',
-                                   view_func=bucket_list_view, methods=['POST', 'GET'])
-# bucket_lists_blueprint.add_url_rule('/bucket-lists/<list_id>',
-#                                      view_func=bucketist_manipulation, methods=['GET', 'PUT', 'DELETE'])
+                                    view_func=bucket_list_view, methods=['POST', 'GET'])
+bucket_lists_blueprint.add_url_rule('/bucket-lists/<slug>',
+                                    view_func=bucket_list_rnu, methods=['GET', 'POST'])
+bucket_lists_blueprint.add_url_rule('/bucket-lists/<slug>/delete',
+                                    view_func=bucket_list_delete, methods=['POST'])

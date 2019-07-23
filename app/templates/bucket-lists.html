@@ -14,7 +14,7 @@
 
             <div class="bucket-list-card-wrapper">
                 {% for b_list in recent_lists %}
-                    <div class="bucket-list-card">
+                    <div class="bucket-list-card" data-click data-href='/bucket-lists/{{ b_list['slug'] }}'>
                         <p class="bucket-list-card__title">{{ b_list['name'] }}</p>
                         <p class="bucket-list-card__description">
                             {% if b_list['description'] %}
@@ -47,9 +47,10 @@
 
                     {% for b_list in bucket_lists %}
                         <tr class="hover">
-                            <td>{{ b_list['name'] }}</td>
+                            <td data-click data-href='/bucket-lists/{{ b_list['slug'] }}'>{{ b_list['name'] }}</td>
                             <td style="text-align: center">
-                                <i class="fas fa-trash red-text" title="Delete {{ b_list['name'] }}"></i>
+                                <i class="fas fa-trash red-text" title="Delete {{ b_list['name'] }}" data-toggle="modal"
+                                   data-target="#deleteModal{{ b_list['slug'] }}"></i>
                             </td>
                         </tr>
                     {% endfor %}
@@ -65,5 +66,12 @@
 
     <!-- Add BucketList Modal -->
     {% include 'partials/add-bucket-list.html' %}
+
+    <!-- Delete Modals -->
+    {% for b_list in bucket_lists %}
+        {% with name=b_list['name'], slug=b_list['slug'] %}
+            {% include 'partials/delete-bucket-list.html' %}
+        {% endwith %}
+    {% endfor %}
 
 {% endblock %}
