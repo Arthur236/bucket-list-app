@@ -23,8 +23,9 @@ class MyDecorator(object):
             return True
 
         return False
-    
-    def is_authenticated(self):
+
+    @staticmethod
+    def is_authenticated():
         """
         Checks if a user is logged in
         """

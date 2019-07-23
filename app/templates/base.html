@@ -26,13 +26,13 @@
 <body>
 
 <!-- Preloader -->
-<div class="preloaderBackground"></div>
+{% include 'partials/preloader.html' %}
 
 <!-- Top Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">
         <img src="{{ url_for('static', filename='img/favicon.png') }}"/>
-        Bucketlist App
+        BucketList App
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -74,7 +74,7 @@
         <div class="sidebar-links-wrapper">
             <ul class="sidebar-links">
                 {% if session['username'] %}
-                    <li><a href="/bucketlists"><i class="fas fa-desktop"></i> Dashboard</a></li>
+                    <li><a href="/bucket-lists"><i class="fas fa-desktop"></i> Dashboard</a></li>
                     <li><a href="/profile"><i class="far fa-user-circle"></i> Profile</a></li>
                     <li><a href="/logout"><i class="fas fa-power-off"></i> Logout</a></li>
                 {% endif %}

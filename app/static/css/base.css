@@ -124,10 +124,10 @@
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
         .wrapper #content .page-title {
           color: #218e64; }
-          .wrapper #content .bucketlist-card-wrapper {
+          .wrapper #content .bucket-list-card-wrapper {
             display: flex;
             flex-wrap: wrap; }
-            .wrapper #content .bucketlist-card-wrapper .bucketlist-card {
+            .wrapper #content .bucket-list-card-wrapper .bucket-list-card {
               position: relative;
               width: 275px;
               max-width: 275px;
@@ -140,19 +140,19 @@
               -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
               -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
               box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5); }
-              .wrapper #content .bucketlist-card-wrapper .bucketlist-card:hover {
+              .wrapper #content .bucket-list-card-wrapper .bucket-list-card:hover {
                 cursor: pointer;
                 -webkit-box-shadow: 0 0 10px 0 rgba(33, 142, 100, 0.5);
                 -moz-box-shadow: 0 0 10px 0 rgba(33, 142, 100, 0.5);
                 box-shadow: 0 0 10px 0 rgba(33, 142, 100, 0.5); }
-                .wrapper #content .bucketlist-card-wrapper .bucketlist-card__title {
+                .wrapper #content .bucket-list-card-wrapper .bucket-list-card__title {
                   padding: 0 10px;
                   margin: 0;
                   color: #218e64; }
-                  .wrapper #content .bucketlist-card-wrapper .bucketlist-card__description {
+                  .wrapper #content .bucket-list-card-wrapper .bucket-list-card__description {
                     padding: 0 10px;
                     margin: 0; }
-                    .wrapper #content .bucketlist-card-wrapper .bucketlist-card__footer {
+                    .wrapper #content .bucket-list-card-wrapper .bucket-list-card__footer {
                       font-size: 70%;
                       position: absolute;
                       width: 100%;
@@ -162,13 +162,13 @@
                       padding: 5px 10px 0 10px;
                       margin: 0;
                       border-top: 1px solid rgba(0, 0, 0, 0.1); }
-        .wrapper #content .bucketlist-table__dashboard .table tr.hover {
+        .wrapper #content .bucket-list-table__dashboard .table tr.hover {
           transition: 0.5s; }
-          .wrapper #content .bucketlist-table__dashboard .table tr.hover:hover {
+          .wrapper #content .bucket-list-table__dashboard .table tr.hover:hover {
             cursor: pointer;
             transform: scaleY(1.001);
             -webkit-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
             -moz-box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5);
             box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.5); }
-        .wrapper #content .bucketlist-table__dashboard .table th {
+        .wrapper #content .bucket-list-table__dashboard .table th {
           font-weight: 800; }

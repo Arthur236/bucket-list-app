@@ -180,11 +180,11 @@ i, span {
       color: $accent-color;
     }
 
-    .bucketlist-card-wrapper {
+    .bucket-list-card-wrapper {
       display: flex;
       flex-wrap: wrap;
 
-      .bucketlist-card {
+      .bucket-list-card {
         position: relative;
         width: 275px;
         max-width: 275px;
@@ -230,7 +230,7 @@ i, span {
       }
     }
 
-    .bucketlist-table__dashboard {
+    .bucket-list-table__dashboard {
       .table {
         tr {
           &.hover {

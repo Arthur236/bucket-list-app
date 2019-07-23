@@ -51,9 +51,9 @@ def create_app(config_name):
 
     # import the authentication blueprint and register it on the app
     from .auth import auth_blueprint
-    from .bucketlists import bucketlists_blueprint
+    from .bucket_lists import bucket_lists_blueprint
 
     app.register_blueprint(auth_blueprint)
-    app.register_blueprint(bucketlists_blueprint)
+    app.register_blueprint(bucket_lists_blueprint)
 
     return app

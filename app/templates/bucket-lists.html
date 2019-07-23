@@ -1,29 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Bucketlist{% endblock %}
+{% block title %}Bucket List{% endblock %}
 
 {% block content %}
 
     <div class="container-fluid">
-        <button class="fab-add-button" data-toggle="modal" data-target="#addBucketlistModal">
+        <button class="fab-add-button" data-toggle="modal" data-target="#addBucketListModal">
             <i class="fas fa-plus"></i>
         </button>
 
-        {% if bucketlists and recent_lists %}
-            <h5 class="page-title">Recent Bucketlists</h5>
+        {% if bucket_lists and recent_lists %}
+            <h5 class="page-title">Recent Bucket Lists</h5>
             <div class="line"></div>
 
-            <div class="bucketlist-card-wrapper">
+            <div class="bucket-list-card-wrapper">
                 {% for b_list in recent_lists %}
-                    <div class="bucketlist-card">
-                        <p class="bucketlist-card__title">{{ b_list['name'] }}</p>
-                        <p class="bucketlist-card__description">
+                    <div class="bucket-list-card">
+                        <p class="bucket-list-card__title">{{ b_list['name'] }}</p>
+                        <p class="bucket-list-card__description">
                             {% if b_list['description'] %}
                                 {{ b_list['description'] }}
                             {% else %}
                                 No description
                             {% endif %}
                         </p>
-                        <p class="bucketlist-card__footer">
+                        <p class="bucket-list-card__footer">
                             2 items
                         </p>
                     </div>
@@ -31,10 +31,10 @@
             </div>
 
             <br/>
-            <h5 class="page-title">All Your Bucketlists</h5>
+            <h5 class="page-title">All Your Bucket Lists</h5>
             <div class="line"></div>
 
-            <div class="bucketlist-table__dashboard">
+            <div class="bucket-list-table__dashboard">
                 <table class="table table-borderless">
                     <thead>
                     <tr>
@@ -45,10 +45,12 @@
 
                     <tbody>
 
-                    {% for b_list in bucketlists %}
+                    {% for b_list in bucket_lists %}
                         <tr class="hover">
                             <td>{{ b_list['name'] }}</td>
-                            <td><i class="fas fa-trash red-text" title="Delete {{ b_list['name'] }}"></i></td>
+                            <td style="text-align: center">
+                                <i class="fas fa-trash red-text" title="Delete {{ b_list['name'] }}"></i>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -56,12 +58,12 @@
             </div>
         {% else %}
             <blockquote>
-                <h3 class="grey-text">You currently have no bucketlists in your account.</h3>
+                <h3 class="grey-text">You currently have no bucket lists in your account.</h3>
             </blockquote>
         {% endif %}
     </div>
 
-    <!-- Add Bucketlist Modal -->
-    {% include 'partials/add-bucketlist.html' %}
+    <!-- Add BucketList Modal -->
+    {% include 'partials/add-bucket-list.html' %}
 
 {% endblock %}

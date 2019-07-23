@@ -4,14 +4,14 @@ import json
 from app import create_app, db
 
 
-class BucketlistTestCase(unittest.TestCase):
-    """This class represents the bucketlist test case"""
+class BucketListTestCase(unittest.TestCase):
+    """This class represents the bucket_list test case"""
 
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
-        self.bucketlist = {'name': 'Go to Borabora for vacay'}
+        self.bucket_list = {'name': 'Go to Borabora for vacay'}
 
         # binds the app to the current context
         with self.app.app_context():
@@ -34,117 +34,117 @@ class BucketlistTestCase(unittest.TestCase):
         }
         return self.client().post('/auth/login', data=user_data)
 
-    def test_bucketlist_creation(self):
-        """Test API can create a bucketlist (POST request)"""
+    def test_bucket_list_creation(self):
+        """Test API can create a bucket_list (POST request)"""
         self.register_user()
         result = self.login_user()
         access_token = json.loads(result.data.decode())['access_token']
 
-        # create a bucketlist by making a POST request
+        # create a bucket_list by making a POST request
         res = self.client().post(
-            '/bucketlists/',
+            '/bucket-lists/',
             headers=dict(Authorization="Bearer " + access_token),
-            data=self.bucketlist)
+            data=self.bucket_list)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Go to Borabora', str(res.data))
 
-    def test_api_can_get_all_bucketlists(self):
-        """Test API can get a bucketlist (GET request)."""
+    def test_api_can_get_all_bucket_lists(self):
+        """Test API can get a bucket_list (GET request)."""
         self.register_user()
         result = self.login_user()
         access_token = json.loads(result.data.decode())['access_token']
 
-        # create a bucketlist by making a POST request
+        # create a bucket_list by making a POST request
         res = self.client().post(
-            '/bucketlists/',
+            '/bucket_lists/',
             headers=dict(Authorization="Bearer " + access_token),
-            data=self.bucketlist)
+            data=self.bucket_list)
         self.assertEqual(res.status_code, 201)
 
-        # get all the bucketlists that belong to the test user by making a GET request
+        # get all the bucket_lists that belong to the test user by making a GET request
         res = self.client().get(
-            '/bucketlists/',
+            '/bucket_lists/',
             headers=dict(Authorization="Bearer " + access_token),
         )
         self.assertEqual(res.status_code, 200)
         self.assertIn('Go to Borabora', str(res.data))
 
-    def test_api_can_get_bucketlist_by_id(self):
-        """Test API can get a single bucketlist by using it's id."""
+    def test_api_can_get_bucket_list_by_id(self):
+        """Test API can get a single bucket_list by using it's id."""
         self.register_user()
         result = self.login_user()
         access_token = json.loads(result.data.decode())['access_token']
 
         rv = self.client().post(
-            '/bucketlists/',
+            '/bucket_lists/',
             headers=dict(Authorization="Bearer " + access_token),
-            data=self.bucketlist)
+            data=self.bucket_list)
 
-        # assert that the bucketlist is created 
+        # assert that the bucket_list is created
         self.assertEqual(rv.status_code, 201)
         # get the response data in json format
         results = json.loads(rv.data.decode())
 
         result = self.client().get(
-            '/bucketlists/{}'.format(results['id']),
+            '/bucket_lists/{}'.format(results['id']),
             headers=dict(Authorization="Bearer " + access_token))
-        # assert that the bucketlist is actually returned given its ID
+        # assert that the bucket_list is actually returned given its ID
         self.assertEqual(result.status_code, 200)
         self.assertIn('Go to Borabora', str(result.data))
 
-    def test_bucketlist_can_be_edited(self):
-        """Test API can edit an existing bucketlist. (PUT request)"""
+    def test_bucket_list_can_be_edited(self):
+        """Test API can edit an existing bucket_list. (PUT request)"""
         self.register_user()
         result = self.login_user()
         access_token = json.loads(result.data.decode())['access_token']
 
-        # first, we create a bucketlist by making a POST request
+        # first, we create a bucket_list by making a POST request
         rv = self.client().post(
-            '/bucketlists/',
+            '/bucket_lists/',
             headers=dict(Authorization="Bearer " + access_token),
             data={'name': 'Eat, pray and love'})
         self.assertEqual(rv.status_code, 201)
-        # get the json with the bucketlist
+        # get the json with the bucket_list
         results = json.loads(rv.data.decode())
 
-        # then, we edit the created bucketlist by making a PUT request
+        # then, we edit the created bucket_list by making a PUT request
         rv = self.client().put(
-            '/bucketlists/{}'.format(results['id']),
+            '/bucket_lists/{}'.format(results['id']),
             headers=dict(Authorization="Bearer " + access_token),
             data={
                 "name": "Dont just eat, but also pray and love :-)"
             })
         self.assertEqual(rv.status_code, 200)
 
-        # finally, we get the edited bucketlist to see if it is actually edited.
+        # finally, we get the edited bucket_list to see if it is actually edited.
         results = self.client().get(
-            '/bucketlists/{}'.format(results['id']),
+            '/bucket-lists/{}'.format(results['id']),
             headers=dict(Authorization="Bearer " + access_token))
         self.assertIn('Dont just eat', str(results.data))
 
-    def test_bucketlist_deletion(self):
-        """Test API can delete an existing bucketlist. (DELETE request)."""
+    def test_bucket_list_deletion(self):
+        """Test API can delete an existing bucket_list. (DELETE request)."""
         self.register_user()
         result = self.login_user()
         access_token = json.loads(result.data.decode())['access_token']
 
         rv = self.client().post(
-            '/bucketlists/',
+            '/bucket-lists/',
             headers=dict(Authorization="Bearer " + access_token),
             data={'name': 'Eat, pray and love'})
         self.assertEqual(rv.status_code, 201)
-        # get the bucketlist in json
+        # get the bucket_list in json
         results = json.loads(rv.data.decode())
 
-        # delete the bucketlist we just created
+        # delete the bucket_list we just created
         res = self.client().delete(
-            '/bucketlists/{}'.format(results['id']),
+            '/bucket-lists/{}'.format(results['id']),
             headers=dict(Authorization="Bearer " + access_token),)
         self.assertEqual(res.status_code, 200)
 
         # Test to see if it exists, should return a 404
         result = self.client().get(
-            '/bucketlists/1',
+            '/bucket-lists/1',
             headers=dict(Authorization="Bearer " + access_token))
         self.assertEqual(result.status_code, 404)
 

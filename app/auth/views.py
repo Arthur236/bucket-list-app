@@ -10,14 +10,12 @@ my_dec = MyDecorator()
 
 
 class RegistrationView(MethodView):
-    """
-    This class registers a new user.
-    """
+    """This class registers a new user."""
+
     @staticmethod
     def post():
-        """
-        Handle POST request for this view. Url ---> /auth/register
-        """
+        """Handle POST request for this view. Url ---> /auth/register"""
+
         username = str(request.form.get('username'))
         email = str(request.form.get('email'))
         password = str(request.form.get('password'))
@@ -57,9 +55,9 @@ class RegistrationView(MethodView):
                     session['username'] = user.username
 
                     flash("You were automatically logged in.")
-                    return redirect(url_for('bucketlists.bucketlist_view'))
+                    return redirect(url_for('bucket_lists.bucket_list_view'))
                 except Exception as e:
-                    # An error occured, therefore return a string message containing the error
+                    # An error occurred, therefore return a string message containing the error
                     flash("Looks like we couldn't log you in automatically. Please try logging in manually.")
                     return redirect(url_for('index'))
             else:
@@ -70,14 +68,12 @@ class RegistrationView(MethodView):
 
 
 class LoginView(MethodView):
-    """
-    This class-based view handles user login and access token generation.
-    """
+    """This class-based view handles user login and access token generation."""
+
     @staticmethod
     def post():
-        """
-        Handle POST request for this view. Url ---> /auth/login
-        """
+        """Handle POST request for this view. Url ---> /auth/login"""
+
         email = str(request.form.get('email', ''))
         password = str(request.form.get('password', ''))
 
@@ -89,7 +85,7 @@ class LoginView(MethodView):
             if user and user.password_is_valid(password):
                 session['username'] = user.username
 
-                return redirect(url_for('bucketlists.bucketlist_view'))
+                return redirect(url_for('bucket_lists.bucket_list_view'))
             else:
                 # User does not exist. Therefore, we return an error message
                 flash('The user does not exist or the password is invalid, Please try again.')

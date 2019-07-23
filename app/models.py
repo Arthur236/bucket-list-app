@@ -19,8 +19,8 @@ class User(db.Model):
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
-    bucketlists = db.relationship(
-        'Bucketlist', order_by='Bucketlist.id', cascade="all, delete-orphan")
+    bucket_lists = db.relationship(
+        'BucketList', order_by='BucketList.id', cascade="all, delete-orphan")
 
     def __init__(self, username, email, password):
         """Initialize the user with an email and a password."""
@@ -47,10 +47,10 @@ class User(db.Model):
         db.session.commit()
 
 
-class Bucketlist(db.Model):
-    """This class represents the bucketlist table."""
+class BucketList(db.Model):
+    """This class represents the bucket_list table."""
 
-    __tablename__ = 'bucketlists'
+    __tablename__ = 'bucket_lists'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
@@ -79,16 +79,16 @@ class Bucketlist(db.Model):
 
     @staticmethod
     def get_all():
-        return Bucketlist.query.all()
+        return BucketList.query.all()
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
 
     def __repr__(self):
-        return "<Bucketlist: {}>".format(self.name)
+        return "<BucketList: {}>".format(self.name)
 
 
 # Set slug value during create and update events
 event.listen(User.username, 'set', User.slugify, retval=False)
-event.listen(Bucketlist.name, 'set', Bucketlist.slugify, retval=False)
+event.listen(BucketList.name, 'set', BucketList.slugify, retval=False)
