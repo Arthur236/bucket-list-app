@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Bucket List{% endblock %}
 
+{% import "macros/pagination.html" as paginate %}
+
 {% block content %}
 
     <div class="container-fluid">
@@ -56,6 +58,8 @@
                     {% endfor %}
                     </tbody>
                 </table>
+
+                {{ paginate.pagination_widget(page, pages, 'bucket_lists.bucket_list_view') }}
             </div>
         {% else %}
             <blockquote>

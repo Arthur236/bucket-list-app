@@ -103,7 +103,7 @@ class BucketListView(MethodView):
                 results.append(obj)
 
         return render_template('bucket-lists.html', bucket_lists=results, recent_lists=recent_results,
-                               total_lists=total_lists)
+                               total_lists=total_lists, page=page, pages=paginated_lists.pages)
 
 
 class BucketListReadUpdate(MethodView):
